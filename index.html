@@ -23,34 +23,69 @@
 <label>Daily spending ($):</label> <br>
 <input type="number" id="dailySpending"> <br> <br>
 
-<button onclick="addSpending">Add Spending</button>
+<button onclick="addSpending()">Add Spending</button>
 
 <p>Total spent: $<span id="totalSpent">0</span></p>
-<p>Remaining budget: $<span id="remaining"> 0 </span> </p> </body>
+<p>Remaining budget: $<span id="remaining"> 0 </span> </p> 
 
 <P> <H3>basic needs for the week (UPTO 7) </H3> </P>
+<span id="needsTotal">0</span>
+
 
 <label>item 1 (name) ($) :</label><BR>
-<input type="text" id="dailySpending" placeholder="Item + cost"> <br><br>
+<input type="number" class="need-cost" placeholder="Item + cost"> <br><br>
 
 <label>item 2 (name) ($) :</label> <BR>
-<input type="text" id="dailySpending" placeholder="Item + cost"> <br><br>
+<input type="number" class="need-cost" placeholder="Item + cost"> <br><br>
 
 <label>item 3 (name) ($) :</label> <BR>
-<input type="text" id="dailySpending" placeholder="Item + cost"> <br><br>
+<input type="number" class="need-cost" placeholder="Item + cost"> <br><br>
 
 <label>item 4 (name) ($) :</label> <BR>
-<input type="text" id="dailySpending" placeholder="Item + cost"> <br><br>
+<input type="number" class="need-cost" placeholder="Item + cost"> <br><br>
 
 <label>item 5 (name) ($) :</label> <BR>
-<input type="text" id="dailySpending" placeholder="Item + cost"> <br><br>
+<input type="number" class="need-cost" placeholder="Item + cost"> <br><br>
 
 <label>item 6 (name) ($) :</label> <BR>
-<input type="text" id="dailySpending" placeholder="Item + cost"> <br><br>
+<input type="number" class="need-cost" placeholder="Item + cost"> <br><br>
 
 <label>item 7 (name) ($) :</label> <BR>
-<input type="text" id="dailySpending" placeholder="Item + cost"> <br><br>
+<input type="number" class="need-cost" placeholder="Item + cost"> <br><br>
  
+<script>
+let totalSpent = 0;
+function addSpending() {
+  const weeklyEl = document.getElementById('weeklyBudget');
+  const dailyEl  = document.getElementById('dailySpending');
+  const totalEl  = document.getElementById('totalSpent');
+  const remainEl = document.getElementById('remaining');
+  const weekly = parseFloat(weeklyEl.value) || 0;
+  const spent  = parseFloat(dailyEl.value)  || 0;
+  totalSpent += spent;
+  const remaining = weekly - totalSpent;
+  totalEl.textContent = totalSpent.toFixed(2);
+  remainEl.textContent = remaining.toFixed(2); 
+}
+function sumNeeds() {
+  // select all inputs with the class 'need-cost'
+  const costEls = document.querySelectorAll('.need-cost');
+
+  // sum them
+  let sum = 0;
+  costEls.forEach(el => {
+    const val = parseFloat(el.value) || 0;
+    sum += val;
+  });
+
+  // show the result (create a span or reuse an existing element)
+  // assume you add <span id="needsTotal">0</span> somewhere
+  const needsTotalEl = document.getElementById('needsTotal');
+  needsTotalEl.textContent = sum.toFixed(2);
+}
+
+
+</script>
 
 
 </body>  
