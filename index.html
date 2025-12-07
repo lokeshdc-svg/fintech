@@ -66,6 +66,19 @@ function addSpending() {
   const remaining = weekly - totalSpent;
   totalEl.textContent = totalSpent.toFixed(2);
   remainEl.textContent = remaining.toFixed(2); 
+  function updateGrandAndRemaining() {
+  const needs = parseFloat(document.getElementById("needsTotal").textContent) || 0;
+  const grand = totalSpent + needs;
+
+  // update grand total on page
+  document.getElementById("grandTotal").textContent = grand.toFixed(2);
+
+  // update remaining budget
+  const weekly = parseFloat(document.getElementById("weeklyBudget").value) || 0;
+  const remaining = weekly - grand;
+  document.getElementById("remaining").textContent = remaining.toFixed(2);
+}
+
 }
 function sumNeeds() {
   // select all inputs with the class 'need-cost'
